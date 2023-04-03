@@ -1,13 +1,25 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
-function Login() {
+function Login(props) {
   const RContext = useContext(ReceitasContext);
   const { teste } = RContext;
   console.log(teste);
 
+  const { history } = props;
+
   const [email, setEmail] = useState('');
   const [password, setPassord] = useState('');
+
+  const pswMinLeng = 6;
+  const validRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const btnDisabled = password.length > pswMinLeng && email.match(validRegex);
+
+  const onClickHander = () => {
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/meals');
+  };
 
   return (
     <div>
@@ -35,7 +47,8 @@ function Login() {
       <button
         type="button"
         data-testid="login-submit-btn"
-        onClick={ () => console.log('ok') }
+        onClick={ onClickHander }
+        disabled={ !btnDisabled }
       >
         Login
 
@@ -43,5 +56,11 @@ function Login() {
     </div>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;
