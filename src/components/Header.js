@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
@@ -6,6 +6,9 @@ import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
   const { title, search } = props;
+
+  const [searchArea, setSearchArea] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   return (
     <div>
@@ -16,7 +19,23 @@ function Header(props) {
       {
         search && (
           <div>
-            <img src={ searchIcon } alt="Profile Icon" data-testid="search-top-btn" />
+            <button onClick={ () => setSearchArea(!searchArea) }>
+              <img
+                src={ searchIcon }
+                alt="Search Icon"
+                data-testid="search-top-btn"
+              />
+            </button>
+            {
+              searchArea && (
+                <input
+                  type="text"
+                  value={ searchInput }
+                  onChange={ (e) => setSearchInput(e.target.value) }
+                  data-testid="search-input"
+                />
+              )
+            }
           </div>
         )
       }
