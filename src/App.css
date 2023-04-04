@@ -66,3 +66,10 @@
     transform: rotate(-10deg);
   }
 }
+
+.footer {
+
+  /* stylelint-disable-next-line length-zero-no-unit */
+  bottom: 0px;
+  position: fixed;
+}
