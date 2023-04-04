@@ -27,7 +27,7 @@ function Header(props) {
               />
             </button>
             {
-              searchArea && <SearchBar />
+              searchArea && <SearchBar title={ title } />
             }
           </div>
         )

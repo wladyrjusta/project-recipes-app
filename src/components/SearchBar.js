@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import fetchRecipe from '../helpers/fetchRecipe';
+import ReceitasContext from '../context/ReceitasContext';
 
-function SearchBar() {
+function SearchBar(props) {
+  const { title } = props;
+
+  const RecipeContext = useContext(ReceitasContext);
+  const { recipes, setRecipes } = RecipeContext;
+  console.log(recipes);
+
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState('');
+  const [lastSearch, setLastSearch] = useState({ input: '', type: '' });
+
+  useEffect(() => {
+    fetchRecipe(title, lastSearch, setRecipes);
+  }, [lastSearch]);
 
   return (
     <div>
@@ -47,7 +61,7 @@ function SearchBar() {
       </label>
       <button
         type="button"
-        onClick={ () => console.log(searchType) }
+        onClick={ () => setLastSearch({ input: searchInput, type: searchType }) }
         data-testid="exec-search-btn"
       >
         Search
@@ -56,5 +70,9 @@ function SearchBar() {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
