@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   const { title, search } = props;
 
   const [searchArea, setSearchArea] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
 
   return (
     <div>
@@ -27,14 +27,7 @@ function Header(props) {
               />
             </button>
             {
-              searchArea && (
-                <input
-                  type="text"
-                  value={ searchInput }
-                  onChange={ (e) => setSearchInput(e.target.value) }
-                  data-testid="search-input"
-                />
-              )
+              searchArea && <SearchBar />
             }
           </div>
         )
