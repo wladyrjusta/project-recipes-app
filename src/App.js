@@ -5,7 +5,7 @@ import './App.css';
 import ReceitasProvider from './context/ReceitasProvider';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
-import Profile from './pages/Profle';
+import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import MealDetails from './pages/MealDetails';

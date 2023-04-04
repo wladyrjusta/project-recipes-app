@@ -10,7 +10,6 @@ function Profile() {
         <Header title="Profile" search={ false } />
       </div>
       <Footer />
-
     </>
   );
 }
