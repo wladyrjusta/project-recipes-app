@@ -10,10 +10,15 @@ function Meals(props) {
 
   const RecipeContext = useContext(ReceitasContext);
   const { recipes } = RecipeContext;
-  // console.log(recipes);
+  const isNull = recipes !== null;
+  console.log(recipes);
+  console.log(isNull);
 
   useEffect(() => {
-    if (recipes.length === 1) {
+    if (!isNull) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (recipes.length === 1) {
+      console.log('aqui');
       const { idMeal } = recipes[0];
       history.push(`/meals/${idMeal}`);
     }
@@ -23,7 +28,7 @@ function Meals(props) {
       <Header title="Meals" search />
       <div>
         {
-          recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
+          isNull && recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
             key={ r.idMeal }
             image={ r.strMealThumb }
             name={ r.strMeal }

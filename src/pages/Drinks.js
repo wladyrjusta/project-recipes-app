@@ -10,10 +10,14 @@ function Drinks(props) {
 
   const RecipeContext = useContext(ReceitasContext);
   const { recipes } = RecipeContext;
-  // console.log(recipes);
+  const isNull = recipes !== null;
+  console.log(recipes);
+  console.log(isNull);
 
   useEffect(() => {
-    if (recipes.length === 1) {
+    if (!isNull) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (recipes.length === 1) {
       const { idDrink } = recipes[0];
       history.push(`/drinks/${idDrink}`);
     }
@@ -23,7 +27,7 @@ function Drinks(props) {
       <Header title="Drinks" search />
       <div>
         {
-          recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
+          isNull && recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
             key={ r.idDrink }
             image={ r.strDrinkThumb }
             name={ r.strDrink }
