@@ -4,10 +4,13 @@ import ReceitasContext from './ReceitasContext';
 
 export default function ReceitasProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const globalState = useMemo(() => ({
     recipes,
     setRecipes,
+    categories,
+    setCategories,
   }), [recipes]);
 
   return (

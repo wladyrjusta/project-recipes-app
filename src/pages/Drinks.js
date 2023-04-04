@@ -4,17 +4,19 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 import Recipes from '../components/Recipes';
-import { fetchFirstRecipes } from '../helpers/fetchRecipe';
+import { fetchFirstRecipes, fetchCategories } from '../helpers/fetchRecipe';
+import Categories from '../components/Categories';
 
 function Drinks(props) {
   const { history } = props;
 
   const RecipeContext = useContext(ReceitasContext);
-  const { recipes, setRecipes } = RecipeContext;
+  const { recipes, setRecipes, setCategories } = RecipeContext;
   const isNull = recipes !== null;
 
   useEffect(() => {
     fetchFirstRecipes('Drinks', setRecipes);
+    fetchCategories('Drinks', setCategories);
   }, []);
 
   useEffect(() => {
@@ -28,6 +30,7 @@ function Drinks(props) {
   return (
     <div>
       <Header title="Drinks" search />
+      <Categories />
       <div>
         {
           isNull && <Recipes page="Drinks" />
