@@ -2,9 +2,11 @@ import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import ReceitasContext from '../context/ReceitasContext';
+import Recipecard from '../components/Recipecard';
 
 function Meals(props) {
   const { history } = props;
+  const maxRecipes = 12;
 
   const RecipeContext = useContext(ReceitasContext);
   const { recipes } = RecipeContext;
@@ -19,6 +21,16 @@ function Meals(props) {
   return (
     <div>
       <Header title="Meals" search />
+      <div>
+        {
+          recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
+            key={ r.idMeal }
+            image={ r.strMealThumb }
+            name={ r.strMeal }
+            index={ i }
+          />))
+        }
+      </div>
     </div>
   );
 }
