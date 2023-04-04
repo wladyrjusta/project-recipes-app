@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
-import Recipecard from '../components/Recipecard';
+import Recipes from '../components/Recipes';
+import { fetchFirstRecipes } from '../helpers/fetchRecipe';
 
 function Drinks(props) {
   const { history } = props;
-  const maxRecipes = 12;
 
   const RecipeContext = useContext(ReceitasContext);
-  const { recipes } = RecipeContext;
+  const { recipes, setRecipes } = RecipeContext;
   const isNull = recipes !== null;
-  console.log(recipes);
-  console.log(isNull);
+
+  useEffect(() => {
+    fetchFirstRecipes('Drinks', setRecipes);
+  }, []);
 
   useEffect(() => {
     if (!isNull) {
@@ -28,12 +30,7 @@ function Drinks(props) {
       <Header title="Drinks" search />
       <div>
         {
-          isNull && recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
-            key={ r.idDrink }
-            image={ r.strDrinkThumb }
-            name={ r.strDrink }
-            index={ i }
-          />))
+          isNull && <Recipes page="Drinks" />
         }
       </div>
       <Footer />

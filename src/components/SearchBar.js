@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import fetchRecipe from '../helpers/fetchRecipe';
+import { fetchRecipe } from '../helpers/fetchRecipe';
 import ReceitasContext from '../context/ReceitasContext';
 
 function SearchBar(props) {

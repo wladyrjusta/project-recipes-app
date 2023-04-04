@@ -39,4 +39,15 @@ const fetchRecipe = (page, lastSearch, setRecipes) => {
   }
 };
 
-export default fetchRecipe;
+const fetchFirstRecipes = (page, setRecipes) => {
+  if (page === 'Meals') {
+    return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((result) => result.json())
+      .then((data) => setRecipes(data.meals));
+  }
+  return fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+    .then((result) => result.json())
+    .then((data) => setRecipes(data.drinks));
+};
+
+export { fetchRecipe, fetchFirstRecipes };
