@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 import Recipecard from '../components/Recipecard';
 
@@ -35,6 +36,7 @@ function Drinks(props) {
           />))
         }
       </div>
+      <Footer />
     </div>
   );
 }
