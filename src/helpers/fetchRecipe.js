@@ -22,12 +22,12 @@ const fetchRecipe = (page, lastSearch, setRecipes) => {
   if (lastSearch.type === 'ingredient') {
     return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${lastSearch.input}`)
       .then((result) => result.json())
-      .then((data) => setRecipes(data.meals));
+      .then((data) => setRecipes(data.drinks));
   }
   if (lastSearch.type === 'name') {
     return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${lastSearch.input}`)
       .then((result) => result.json())
-      .then((data) => setRecipes(data.meals));
+      .then((data) => setRecipes(data.drinks));
   }
   if (lastSearch.type === 'first-letter') {
     if (lastSearch.input.length > 1) {
@@ -35,7 +35,7 @@ const fetchRecipe = (page, lastSearch, setRecipes) => {
     }
     return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${lastSearch.input}`)
       .then((result) => result.json())
-      .then((data) => setRecipes(data.meals));
+      .then((data) => setRecipes(data.drinks));
   }
 };
 

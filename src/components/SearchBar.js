@@ -7,8 +7,7 @@ function SearchBar(props) {
   const { title } = props;
 
   const RecipeContext = useContext(ReceitasContext);
-  const { recipes, setRecipes } = RecipeContext;
-  console.log(recipes);
+  const { setRecipes } = RecipeContext;
 
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState('');
