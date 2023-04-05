@@ -8,10 +8,9 @@ import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import MealDetails from './pages/MealDetails';
-import DrinkDetails from './pages/DrinkDetails';
 import MealProgress from './pages/MealProgress';
 import DrinkProgress from './pages/DrinkProgress';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   return (
@@ -20,8 +19,14 @@ function App() {
         <ReceitasProvider>
           <Route path="/drinks/:id-da-receita/in-progress" component={ DrinkProgress } />
           <Route path="/meals/:id-da-receita/in-progress" component={ MealProgress } />
-          <Route path="/drinks/:id" component={ DrinkDetails } />
-          <Route path="/meals/:id" component={ MealDetails } />
+          <Route
+            path="/drinks/:id"
+            render={ (props) => <RecipeDetails { ...props } page="Drinks" /> }
+          />
+          <Route
+            path="/meals/:id"
+            render={ (props) => <RecipeDetails { ...props } page="Meals" /> }
+          />
           <Route path="/favorite-recipes" component={ FavoriteRecipes } />
           <Route path="/done-recipes" component={ DoneRecipes } />
           <Route path="/profile" component={ Profile } />
