@@ -6,11 +6,28 @@ import App from '../App';
 import { renderWithRouter } from './helpers/renderWith';
 
 const drinksBottomBtn = 'drinks-bottom-btn';
+const emailInputID = 'email-input';
+const passwordInputID = 'password-input';
+const loginInputID = 'login-submit-btn';
+const profileTopBtnId = 'profile-top-btn';
+
+const validEmail = 'teste@teste.com';
 
 describe('Testes do componente Footer', () => {
   test('Teta se o componente é renderizado corretamente na rota /meals', () => {
-    const initialEntries = ['/profile'];
-    renderWithRouter(<App />, { initialEntries });
+    renderWithRouter(<App />);
+
+    const emailloginInput = screen.getByTestId(emailInputID);
+    const passwordInput = screen.getByTestId(passwordInputID);
+    const loginBtn = screen.getByTestId(loginInputID);
+
+    userEvent.type(emailloginInput, validEmail);
+    userEvent.type(passwordInput, '1234567');
+
+    userEvent.click(loginBtn);
+
+    const profileRedirectBtn = screen.getByTestId(profileTopBtnId);
+    userEvent.click(profileRedirectBtn);
 
     const footerDrinksBtn = screen.getByTestId(drinksBottomBtn);
     const footerMealsBtn = screen.getByTestId('meals-bottom-btn');
