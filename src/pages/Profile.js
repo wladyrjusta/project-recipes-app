@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile({ history }) {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const email = JSON.parse(localStorage.getItem('user'));
+  console.log(email);
   return (
     <>
       <div>
@@ -13,7 +14,7 @@ function Profile({ history }) {
         <h2
           data-testid="profile-email"
         >
-          { email }
+          { email && email.email }
         </h2>
         <button
           data-testid="profile-done-btn"
