@@ -3,22 +3,36 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
-import Recipecard from '../components/Recipecard';
+import Recipes from '../components/Recipes';
+import { fetchFirstRecipes,
+  fetchCategories,
+  fetchRecipesFromCategory } from '../helpers/fetchRecipe';
+import Categories from '../components/Categories';
 
 function Drinks(props) {
   const { history } = props;
-  const maxRecipes = 12;
 
   const RecipeContext = useContext(ReceitasContext);
-  const { recipes } = RecipeContext;
+  const { recipes, setRecipes, setCategories, curCategory } = RecipeContext;
   const isNull = recipes !== null;
-  console.log(recipes);
-  console.log(isNull);
+
+  useEffect(() => {
+    fetchFirstRecipes('Drinks', setRecipes);
+    fetchCategories('Drinks', setCategories);
+  }, []);
+
+  useEffect(() => {
+    if (curCategory === 'All') {
+      fetchFirstRecipes('Drinks', setRecipes);
+    } else {
+      fetchRecipesFromCategory('Drinks', curCategory, setRecipes);
+    }
+  }, [curCategory]);
 
   useEffect(() => {
     if (!isNull) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    } else if (recipes.length === 1) {
+    } else if (recipes.length === 1 && curCategory === 'All') {
       const { idDrink } = recipes[0];
       history.push(`/drinks/${idDrink}`);
     }
@@ -26,14 +40,10 @@ function Drinks(props) {
   return (
     <div>
       <Header title="Drinks" search />
+      <Categories />
       <div>
         {
-          isNull && recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
-            key={ r.idDrink }
-            image={ r.strDrinkThumb }
-            name={ r.strDrink }
-            index={ i }
-          />))
+          isNull && <Recipes page="Drinks" />
         }
       </div>
       <Footer />
