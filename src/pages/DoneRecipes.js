@@ -4,7 +4,8 @@ import DoneRecipeCard from '../components/DoneRecipesCard';
 
 function DoneRecipes() {
   const arrayDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const [filteredRecipes, setFilteredRecipes] = useState([...arrayDoneRecipes]);
+  const [filteredRecipes, setFilteredRecipes] = useState(arrayDoneRecipes
+    && [...arrayDoneRecipes]);
 
   const handleFilterClic = (type = '') => {
     const filteredArrayDoneRecipes = arrayDoneRecipes
@@ -34,7 +35,7 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      { filteredRecipes.length > 0
+      { (filteredRecipes && filteredRecipes.length > 0)
         && filteredRecipes.map((recipe, index) => (
           <DoneRecipeCard
             key={ index }
