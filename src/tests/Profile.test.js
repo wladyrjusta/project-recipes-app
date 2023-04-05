@@ -41,19 +41,8 @@ describe('Testes da Página Profile', () => {
     expect(profileLogoutBtn).toBeVisible();
   });
   test('Teta se o botão Done Recipes direcionam de forma correta para pagina página de /done-recipes', () => {
-    const { history } = renderWithRouter(<App />);
-
-    const emailloginInput = screen.getByTestId(emailInputID);
-    const passwordInput = screen.getByTestId(passwordInputID);
-    const loginBtn = screen.getByTestId(loginInputID);
-
-    userEvent.type(emailloginInput, validEmail);
-    userEvent.type(passwordInput, '1234567');
-
-    userEvent.click(loginBtn);
-
-    const profileRedirectBtn = screen.getByTestId(profileTopBtnId);
-    userEvent.click(profileRedirectBtn);
+    const initialEntries = ['/profile'];
+    const { history } = renderWithRouter(<App />, { initialEntries });
 
     const profileHeader = screen.getByRole('heading', { name: 'Profile' });
     expect(profileHeader).toBeVisible();
@@ -70,19 +59,8 @@ describe('Testes da Página Profile', () => {
     expect(screen.queryByRole('heading', { name: 'Profile' })).not.toBeInTheDocument();
   });
   test('Teta se o botão Favorite Recipes direcionam de forma correta para pagina página de /favorite-recipes', () => {
-    const { history } = renderWithRouter(<App />);
-
-    const emailloginInput = screen.getByTestId(emailInputID);
-    const passwordInput = screen.getByTestId(passwordInputID);
-    const loginBtn = screen.getByTestId(loginInputID);
-
-    userEvent.type(emailloginInput, validEmail);
-    userEvent.type(passwordInput, '1234567');
-
-    userEvent.click(loginBtn);
-
-    const profileRedirectBtn = screen.getByTestId(profileTopBtnId);
-    userEvent.click(profileRedirectBtn);
+    const initialEntries = ['/profile'];
+    const { history } = renderWithRouter(<App />, { initialEntries });
 
     const profileHeader = screen.getByRole('heading', { name: 'Profile' });
     expect(profileHeader).toBeVisible();
@@ -99,19 +77,8 @@ describe('Testes da Página Profile', () => {
     expect(screen.queryByRole('heading', { name: 'Profile' })).not.toBeInTheDocument();
   });
   test('Teta se o botão Logout direcionam de forma correta para pagina página home /', () => {
-    const { history } = renderWithRouter(<App />);
-
-    const emailloginInput = screen.getByTestId(emailInputID);
-    const passwordInput = screen.getByTestId(passwordInputID);
-    const loginBtn = screen.getByTestId(loginInputID);
-
-    userEvent.type(emailloginInput, validEmail);
-    userEvent.type(passwordInput, '1234567');
-
-    userEvent.click(loginBtn);
-
-    const profileRedirectBtn = screen.getByTestId(profileTopBtnId);
-    userEvent.click(profileRedirectBtn);
+    const initialEntries = ['/profile'];
+    const { history } = renderWithRouter(<App />, { initialEntries });
 
     const profileHeader = screen.getByRole('heading', { name: 'Profile' });
     expect(profileHeader).toBeVisible();
