@@ -8,10 +8,12 @@ function DoneRecipes() {
     && [...arrayDoneRecipes]);
 
   const handleFilterClic = (type = '') => {
-    const filteredArrayDoneRecipes = arrayDoneRecipes
-      .filter((recipe) => recipe.type.startsWith(type));
+    if (arrayDoneRecipes && arrayDoneRecipes.length > 0) {
+      const filteredArrayDoneRecipes = arrayDoneRecipes
+        .filter((recipe) => recipe.type.startsWith(type));
 
-    setFilteredRecipes([...filteredArrayDoneRecipes]);
+      setFilteredRecipes([...filteredArrayDoneRecipes]);
+    }
   };
 
   return (
