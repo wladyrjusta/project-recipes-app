@@ -11,6 +11,7 @@ function Recipes({ page }) {
   const keyValue = page === 'Meals' ? 'idMeal' : 'idDrink';
   const imgValue = page === 'Meals' ? 'strMealThumb' : 'strDrinkThumb';
   const nameValue = page === 'Meals' ? 'strMeal' : 'strDrink';
+  const idValue = page === 'Meals' ? 'idMeal' : 'idDrink';
 
   return (
     <div>
@@ -19,6 +20,7 @@ function Recipes({ page }) {
           key={ r[keyValue] }
           image={ r[imgValue] }
           name={ r[nameValue] }
+          url={ `/${page.toLowerCase()}/${r[idValue]}` }
           index={ i }
         />))
       }

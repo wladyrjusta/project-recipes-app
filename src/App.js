@@ -20,13 +20,13 @@ function App() {
         <ReceitasProvider>
           <Route path="/drinks/:id-da-receita/in-progress" component={ DrinkProgress } />
           <Route path="/meals/:id-da-receita/in-progress" component={ MealProgress } />
-          <Route path="/drinks/:id-da-receita" component={ DrinkDetails } />
-          <Route path="/meals/:id-da-receita" component={ MealDetails } />
+          <Route path="/drinks/:id" component={ DrinkDetails } />
+          <Route path="/meals/:id" component={ MealDetails } />
           <Route path="/favorite-recipes" component={ FavoriteRecipes } />
           <Route path="/done-recipes" component={ DoneRecipes } />
           <Route path="/profile" component={ Profile } />
-          <Route path="/drinks" component={ Drinks } />
-          <Route path="/meals" component={ Meals } />
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route exact path="/meals" component={ Meals } />
           <Route exact path="/" component={ Login } />
         </ReceitasProvider>
       </Switch>

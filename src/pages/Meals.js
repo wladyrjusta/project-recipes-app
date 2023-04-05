@@ -32,7 +32,7 @@ function Meals(props) {
   useEffect(() => {
     if (!isNull) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    } else if (recipes.length === 1) {
+    } else if (recipes.length === 1 && curCategory === 'All') {
       const { idMeal } = recipes[0];
       history.push(`/meals/${idMeal}`);
     }
