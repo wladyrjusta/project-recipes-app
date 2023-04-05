@@ -6,7 +6,7 @@ export default function ReceitasProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [curCategory, setCurCategory] = useState('All');
-  const [curRecipe, setCurRecipe] = useState({});
+  const [curRecipe, setCurRecipe] = useState('');
 
   const globalState = useMemo(() => ({
     recipes,
