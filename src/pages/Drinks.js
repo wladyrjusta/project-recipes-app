@@ -4,20 +4,30 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 import Recipes from '../components/Recipes';
-import { fetchFirstRecipes, fetchCategories } from '../helpers/fetchRecipe';
+import { fetchFirstRecipes,
+  fetchCategories,
+  fetchRecipesFromCategory } from '../helpers/fetchRecipe';
 import Categories from '../components/Categories';
 
 function Drinks(props) {
   const { history } = props;
 
   const RecipeContext = useContext(ReceitasContext);
-  const { recipes, setRecipes, setCategories } = RecipeContext;
+  const { recipes, setRecipes, setCategories, curCategory } = RecipeContext;
   const isNull = recipes !== null;
 
   useEffect(() => {
     fetchFirstRecipes('Drinks', setRecipes);
     fetchCategories('Drinks', setCategories);
   }, []);
+
+  useEffect(() => {
+    if (curCategory === 'All') {
+      fetchFirstRecipes('Drinks', setRecipes);
+    } else {
+      fetchRecipesFromCategory('Drinks', curCategory, setRecipes);
+    }
+  }, [curCategory]);
 
   useEffect(() => {
     if (!isNull) {

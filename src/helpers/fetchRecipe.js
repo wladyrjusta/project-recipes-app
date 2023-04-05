@@ -61,4 +61,15 @@ const fetchCategories = (page, setCategories) => {
     .then((data) => setCategories(data.drinks.map((c) => c.strCategory)));
 };
 
-export { fetchRecipe, fetchFirstRecipes, fetchCategories };
+const fetchRecipesFromCategory = (page, category, setRecipes) => {
+  if (page === 'Meals') {
+    return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+      .then((result) => result.json())
+      .then((data) => setRecipes(data.meals));
+  }
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
+    .then((result) => result.json())
+    .then((data) => setRecipes(data.drinks));
+};
+
+export { fetchRecipe, fetchFirstRecipes, fetchCategories, fetchRecipesFromCategory };
