@@ -5,20 +5,54 @@ import ReceitasContext from '../context/ReceitasContext';
 import HeaderDetails from '../components/details/HeaderDetails';
 import Ingredients from '../components/details/Ingredients';
 import Recomended from '../components/details/Recomended';
+import RecipeButton from '../components/details/RecipeButton';
 
 function RecipeDetails(props) {
   const { page } = props;
   const { match: { params: { id } } } = props;
 
+  const [done, setDone] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
   const [recomendation, setRecomendation] = useState([]);
   const [ytURL, setYtURL] = useState('');
 
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe, setCurRecipe } = RecipeContext;
 
+  const searchLocalStorage = (key, idToSearch, setState) => {
+    const searchKey = JSON.parse(localStorage.getItem(key));
+    const searchResult = searchKey.some((r) => r.id === idToSearch);
+    setState(searchResult);
+  };
+
+  const searchInProgress = (idToSearch, setState) => {
+    const searchKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(JSON.stringify(searchKey));
+    const searchResult = Object.keys(searchKey[page.toLowerCase()])
+      .some((i) => i === idToSearch);
+    setState(searchResult);
+  };
+
+  useEffect(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (!doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+
+    if (!inProgressRecipes) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { drinks: {}, meals: {} },
+      ));
+    }
+  }, []);
+
   useEffect(() => {
     fetchDetails(page, id, setCurRecipe);
     fetchRecomendation(page, setRecomendation);
+    searchLocalStorage('doneRecipes', id, setDone);
+    searchInProgress(id, setInProgress);
   }, []);
 
   useEffect(() => {
@@ -49,6 +83,9 @@ function RecipeDetails(props) {
           page={ page }
           recomendation={ recomendation }
         />
+      }
+      {
+        !done && <RecipeButton inProgress={ inProgress } />
       }
     </div>
   );
