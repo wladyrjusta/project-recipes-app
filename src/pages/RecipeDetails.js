@@ -64,7 +64,7 @@ function RecipeDetails(props) {
 
   return (
     <div>
-      <HeaderDetails page={ page } />
+      <HeaderDetails page={ page } rId={ id } />
       <Ingredients />
       <p data-testid="instructions">{curRecipe.strInstructions}</p>
       {
