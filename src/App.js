@@ -17,13 +17,15 @@ function App() {
     <div>
       <Switch>
         <ReceitasProvider>
-          <Route path="/drinks/:id-da-receita/in-progress" component={ DrinkProgress } />
-          <Route path="/meals/:id-da-receita/in-progress" component={ MealProgress } />
+          <Route path="/drinks/:id/in-progress" component={ DrinkProgress } />
+          <Route path="/meals/:id/in-progress" component={ MealProgress } />
           <Route
+            exact
             path="/drinks/:id"
             render={ (props) => <RecipeDetails { ...props } page="Drinks" /> }
           />
           <Route
+            exact
             path="/meals/:id"
             render={ (props) => <RecipeDetails { ...props } page="Meals" /> }
           />

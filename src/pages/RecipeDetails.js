@@ -8,7 +8,7 @@ import Recomended from '../components/details/Recomended';
 import RecipeButton from '../components/details/RecipeButton';
 
 function RecipeDetails(props) {
-  const { page } = props;
+  const { page, history } = props;
   const { match: { params: { id } } } = props;
 
   const [done, setDone] = useState(false);
@@ -85,7 +85,12 @@ function RecipeDetails(props) {
         />
       }
       {
-        !done && <RecipeButton inProgress={ inProgress } />
+        !done && <RecipeButton
+          inProgress={ inProgress }
+          history={ history }
+          id={ id }
+          page={ page }
+        />
       }
     </div>
   );
