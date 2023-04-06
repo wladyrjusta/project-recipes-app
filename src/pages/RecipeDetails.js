@@ -1,14 +1,16 @@
 import React, { useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { fetchDetails } from '../helpers/fetchRecipe';
+import { fetchDetails, fetchRecomendation } from '../helpers/fetchRecipe';
 import ReceitasContext from '../context/ReceitasContext';
 import HeaderDetails from '../components/details/HeaderDetails';
 import Ingredients from '../components/details/Ingredients';
+import Recomended from '../components/details/Recomended';
 
 function RecipeDetails(props) {
   const { page } = props;
   const { match: { params: { id } } } = props;
 
+  const [recomendation, setRecomendation] = useState([]);
   const [ytURL, setYtURL] = useState('');
 
   const RecipeContext = useContext(ReceitasContext);
@@ -16,6 +18,7 @@ function RecipeDetails(props) {
 
   useEffect(() => {
     fetchDetails(page, id, setCurRecipe);
+    fetchRecomendation(page, setRecomendation);
   }, []);
 
   useEffect(() => {
@@ -41,7 +44,12 @@ function RecipeDetails(props) {
           />
         )
       }
-
+      {
+        recomendation.length > 0 && <Recomended
+          page={ page }
+          recomendation={ recomendation }
+        />
+      }
     </div>
   );
 }
