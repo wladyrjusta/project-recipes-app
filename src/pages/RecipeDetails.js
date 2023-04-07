@@ -36,6 +36,7 @@ function RecipeDetails(props) {
   useEffect(() => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
     if (!doneRecipes) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
@@ -45,6 +46,9 @@ function RecipeDetails(props) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(
         { drinks: {}, meals: {} },
       ));
+    }
+    if (!favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
   }, []);
 

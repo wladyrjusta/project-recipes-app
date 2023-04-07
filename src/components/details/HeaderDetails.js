@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clipboardCopy from 'clipboard-copy';
 import ReceitasContext from '../../context/ReceitasContext';
 import icon from '../../images/shareIcon.svg';
-// import blackFavorite from '../../images/blackHeartIcon.svg';
+import blackFavorite from '../../images/blackHeartIcon.svg';
 import whiteFavorite from '../../images/whiteHeartIcon.svg';
 
 function HeaderDetails({ page, rId }) {
@@ -12,7 +12,11 @@ function HeaderDetails({ page, rId }) {
   console.log(curRecipe);
 
   const [linkCopied, setLinkCopied] = useState('');
+  const [favoritesLocal, setFavoritesLocal] = useState([]);
 
+  const whichIcon = favoritesLocal
+    .some((recipe) => recipe.id === curRecipe[`id${
+      page === 'Meals' ? 'Meal' : 'Drink'}`]);
   const imgValue = page === 'Meals' ? 'strMealThumb' : 'strDrinkThumb';
   const nameValue = page === 'Meals' ? 'strMeal' : 'strDrink';
 
@@ -22,18 +26,19 @@ function HeaderDetails({ page, rId }) {
   };
 
   const handleFavorite = (pageStr) => {
+    console.log(pageStr);
     const type = pageStr === 'Meals' ? 'Meal' : 'Drink';
 
     const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const verify = favorites.some((recipe) => recipe.id === curRecipe.id);
+    const verify = favorites.some((recipe) => recipe.id === curRecipe[`id${type}`]);
     let newFavorite = [];
     if (verify) {
-      newFavorite = favorites.filter((recipe) => recipe.id !== curRecipe.id);
+      newFavorite = favorites.filter((recipe) => recipe.id !== curRecipe[`id${type}`]);
     } else {
       newFavorite = [...favorites, {
         id: curRecipe[`id${type}`],
         type: type.toLocaleLowerCase(),
-        nacionality: curRecipe.strArea ? curRecipe.strArea : '',
+        nationality: curRecipe.strArea ? curRecipe.strArea : '',
         category: curRecipe.strCategory,
         alcoholicOrNot: curRecipe.strAlcoholic ? curRecipe.strAlcoholic : '',
         name: curRecipe[`str${type}`],
@@ -42,7 +47,12 @@ function HeaderDetails({ page, rId }) {
       }];
     }
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
+    setFavoritesLocal(newFavorite);
   };
+
+  useEffect(() => {
+    setFavoritesLocal(JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+  }, []);
 
   return (
     <div>
@@ -71,12 +81,12 @@ function HeaderDetails({ page, rId }) {
         />
       </button>
       <button
-        onClick={ () => handleFavorite() }
+        onClick={ () => handleFavorite(page) }
       >
         <img
           data-testid="favorite-btn"
           alt="share button"
-          src={ whiteFavorite }
+          src={ whichIcon ? blackFavorite : whiteFavorite }
         />
       </button>
       <p>{linkCopied}</p>
