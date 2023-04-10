@@ -8,7 +8,6 @@ function IngredientsCheck(props) {
   const { curRecipe } = RecipeContext;
 
   const { page, id, progress, setProgress } = props;
-  console.log(progress);
 
   const regexIngr = /strIngredient/i;
   const regexMeas = /strMeasure/i;

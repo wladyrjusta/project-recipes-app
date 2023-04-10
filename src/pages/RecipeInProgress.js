@@ -9,17 +9,57 @@ function RecipeInProgress(props) {
   const { page, history } = props;
   const { match: { params: { id } } } = props;
 
+  // const [allIngredients, setAllIngredients] = useState([]);
   const [progress, setProgress] = useState([]);
   const [ytURL, setYtURL] = useState('');
 
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe, setCurRecipe } = RecipeContext;
 
+  const getIngredients = () => {
+    const regexIngr = /strIngredient/i;
+
+    const allData = Object.keys(curRecipe).map((c) => (
+      { [c]: curRecipe[c] }
+    ));
+
+    const ingredientsData = allData.filter((d) => Object.keys(d)[0].match(regexIngr));
+
+    const ingredientsRaw = ingredientsData.map((i) => ({
+      strIngredient: i[Object.keys(i)[0]],
+    }));
+
+    return ingredientsRaw
+      .filter((i) => i.strIngredient !== null && i.strIngredient !== '');
+  };
+
   const getProgress = (curPage, idToSearch, setState) => {
     const searchResult = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (searchResult[curPage.toLowerCase()][idToSearch]) {
       setState(searchResult[curPage.toLowerCase()][idToSearch]);
     }
+  };
+
+  const finishRecipe = () => {
+    const timeNow = new Date().toISOString();
+
+    const doneRecipe = {
+      id,
+      type: page === 'Meals' ? 'meal' : 'drink',
+      nationality: curRecipe.strArea || '',
+      category: curRecipe.strCategory,
+      alcoholicOrNot: curRecipe.strAlcoholic || '',
+      name: curRecipe[`str${page === 'Meals' ? 'Meal' : 'Drink'}`],
+      image: curRecipe[`str${page === 'Meals' ? 'Meal' : 'Drink'}Thumb`],
+      doneDate: timeNow,
+      tags: curRecipe.strTags ? curRecipe.strTags.split(',') : [],
+    };
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const newDoneRecipes = [...doneRecipes, doneRecipe];
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+
+    history.push('/done-recipes');
   };
 
   useEffect(() => {
@@ -51,6 +91,8 @@ function RecipeInProgress(props) {
     }
   }, [curRecipe]);
 
+  const allIngredients = getIngredients();
+
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
@@ -76,9 +118,9 @@ function RecipeInProgress(props) {
         <button
           className="footer"
           data-testid="finish-recipe-btn"
-          onClick={ () => {
-            history.push('done/recipes');
-          } }
+          disabled={ allIngredients.length !== progress.length
+             || progress.length === 0 }
+          onClick={ finishRecipe }
         >
           Finish Recipe
         </button>
