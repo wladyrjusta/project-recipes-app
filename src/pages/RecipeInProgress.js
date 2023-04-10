@@ -1,40 +1,29 @@
 import React, { useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { fetchDetails } from '../helpers/fetchRecipe';
 import ReceitasContext from '../context/ReceitasContext';
 import HeaderDetails from '../components/details/HeaderDetails';
+import IngredientsCheck from '../components/details/IngredientsCheck';
+import { fetchDetails } from '../helpers/fetchRecipe';
 
 function RecipeInProgress(props) {
   const { page, history } = props;
   const { match: { params: { id } } } = props;
 
+  const [progress, setProgress] = useState([]);
   const [ytURL, setYtURL] = useState('');
 
   const RecipeContext = useContext(ReceitasContext);
-  const { curRecipe } = RecipeContext;
+  const { curRecipe, setCurRecipe } = RecipeContext;
 
-  //   useEffect(() => {
-  //     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  //     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const getProgress = (curPage, idToSearch, setState) => {
+    const searchResult = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setState(searchResult[curPage.toLowerCase()][idToSearch]);
+  };
 
-  //     if (!doneRecipes) {
-  //       localStorage.setItem('doneRecipes', JSON.stringify([]));
-  //     }
-
-  //     if (!inProgressRecipes) {
-  //       localStorage.setItem('inProgressRecipes', JSON.stringify(
-  //         { drinks: {}, meals: {} },
-  //       ));
-  //     }
-  //     if (!favoriteRecipes) {
-  //       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     fetchDetails(page, id, setCurRecipe);
-  //   }, []);
+  useEffect(() => {
+    fetchDetails(page, id, setCurRecipe);
+    getProgress(page, id, setProgress);
+  }, []);
 
   useEffect(() => {
     if (curRecipe !== '' && page !== 'Drinks') {
@@ -46,6 +35,7 @@ function RecipeInProgress(props) {
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
+      <IngredientsCheck progress={ progress } setProgress={ setProgress } />
       <p data-testid="instructions">{curRecipe.strInstructions}</p>
       {
         page === 'Meals' && (
