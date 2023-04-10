@@ -6,6 +6,7 @@ export default function ReceitasProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [curCategory, setCurCategory] = useState('All');
+  const [curRecipe, setCurRecipe] = useState('');
 
   const globalState = useMemo(() => ({
     recipes,
@@ -14,7 +15,9 @@ export default function ReceitasProvider({ children }) {
     setCategories,
     curCategory,
     setCurCategory,
-  }), [recipes, categories, curCategory]);
+    curRecipe,
+    setCurRecipe,
+  }), [recipes, categories, curCategory, curRecipe]);
 
   return (
     <ReceitasContext.Provider value={ globalState }>

@@ -72,4 +72,32 @@ const fetchRecipesFromCategory = (page, category, setRecipes) => {
     .then((data) => setRecipes(data.drinks));
 };
 
-export { fetchRecipe, fetchFirstRecipes, fetchCategories, fetchRecipesFromCategory };
+const fetchDetails = (page, id, setCurRecipe) => {
+  if (page === 'Meals') {
+    return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+      .then((result) => result.json())
+      .then((data) => setCurRecipe(data.meals[0]));
+  }
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then((result) => result.json())
+    .then((data) => setCurRecipe(data.drinks[0]));
+};
+
+const fetchRecomendation = (page, setRecomendation) => {
+  const maxRecomendation = 6;
+  if (page === 'Meals') {
+    return fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((result) => result.json())
+      .then((data) => setRecomendation(data.drinks.slice(0, maxRecomendation)));
+  }
+  return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+    .then((result) => result.json())
+    .then((data) => setRecomendation(data.meals.slice(0, maxRecomendation)));
+};
+
+export { fetchRecipe,
+  fetchFirstRecipes,
+  fetchCategories,
+  fetchRecipesFromCategory,
+  fetchDetails,
+  fetchRecomendation };
