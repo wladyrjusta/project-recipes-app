@@ -23,12 +23,21 @@ function RecipeInProgress(props) {
   };
 
   useEffect(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (!doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
 
     if (!inProgressRecipes) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(
         { drinks: {}, meals: {} },
       ));
+    }
+    if (!favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
 
     fetchDetails(page, id, setCurRecipe);
@@ -45,7 +54,12 @@ function RecipeInProgress(props) {
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
-      <IngredientsCheck progress={ progress } setProgress={ setProgress } />
+      <IngredientsCheck
+        page={ page }
+        id={ id }
+        progress={ progress }
+        setProgress={ setProgress }
+      />
       <p data-testid="instructions">{curRecipe.strInstructions}</p>
       {
         page === 'Meals' && (
