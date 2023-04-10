@@ -8,17 +8,24 @@ import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import MealProgress from './pages/MealProgress';
-import DrinkProgress from './pages/DrinkProgress';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
   return (
     <div>
       <Switch>
         <ReceitasProvider>
-          <Route path="/drinks/:id/in-progress" component={ DrinkProgress } />
-          <Route path="/meals/:id/in-progress" component={ MealProgress } />
+          <Route
+            exact
+            path="/drinks/:id/in-progress"
+            render={ (props) => <RecipeInProgress { ...props } page="Drinks" /> }
+          />
+          <Route
+            exact
+            path="/meals/:id/in-progress"
+            render={ (props) => <RecipeInProgress { ...props } page="Meals" /> }
+          />
           <Route
             exact
             path="/drinks/:id"

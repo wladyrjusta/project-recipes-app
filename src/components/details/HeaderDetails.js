@@ -9,7 +9,6 @@ import whiteFavorite from '../../images/whiteHeartIcon.svg';
 function HeaderDetails({ page, rId }) {
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe } = RecipeContext;
-  console.log(curRecipe);
 
   const [linkCopied, setLinkCopied] = useState('');
   const [favoritesLocal, setFavoritesLocal] = useState([]);
