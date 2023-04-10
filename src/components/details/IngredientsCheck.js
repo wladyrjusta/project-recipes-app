@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import ReceitasContext from '../../context/ReceitasContext';
 
 function IngredientsCheck(props) {
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe } = RecipeContext;
 
-  const { progress, setProgress } = props;
+  const { progress } = props;
+  console.log(progress);
 
   const regexIngr = /strIngredient/i;
   const regexMeas = /strMeasure/i;
@@ -64,5 +66,9 @@ function IngredientsCheck(props) {
     </ul>
   );
 }
+
+IngredientsCheck.propTypes = {
+  page: PropTypes.arrayOf(String),
+}.isRequired;
 
 export default IngredientsCheck;

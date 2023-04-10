@@ -17,10 +17,20 @@ function RecipeInProgress(props) {
 
   const getProgress = (curPage, idToSearch, setState) => {
     const searchResult = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setState(searchResult[curPage.toLowerCase()][idToSearch]);
+    if (searchResult[curPage.toLowerCase()][idToSearch]) {
+      setState(searchResult[curPage.toLowerCase()][idToSearch]);
+    }
   };
 
   useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (!inProgressRecipes) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { drinks: {}, meals: {} },
+      ));
+    }
+
     fetchDetails(page, id, setCurRecipe);
     getProgress(page, id, setProgress);
   }, []);
