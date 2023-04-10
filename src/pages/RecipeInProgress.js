@@ -9,11 +9,29 @@ function RecipeInProgress(props) {
   const { page, history } = props;
   const { match: { params: { id } } } = props;
 
+  // const [allIngredients, setAllIngredients] = useState([]);
   const [progress, setProgress] = useState([]);
   const [ytURL, setYtURL] = useState('');
 
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe, setCurRecipe } = RecipeContext;
+
+  const getIngredients = () => {
+    const regexIngr = /strIngredient/i;
+
+    const allData = Object.keys(curRecipe).map((c) => (
+      { [c]: curRecipe[c] }
+    ));
+
+    const ingredientsData = allData.filter((d) => Object.keys(d)[0].match(regexIngr));
+
+    const ingredientsRaw = ingredientsData.map((i) => ({
+      strIngredient: i[Object.keys(i)[0]],
+    }));
+
+    return ingredientsRaw
+      .filter((i) => i.strIngredient !== null && i.strIngredient !== '');
+  };
 
   const getProgress = (curPage, idToSearch, setState) => {
     const searchResult = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -22,13 +40,44 @@ function RecipeInProgress(props) {
     }
   };
 
+  const finishRecipe = () => {
+    const timeNow = new Date().toISOString();
+
+    const doneRecipe = {
+      id,
+      type: page === 'Meals' ? 'meal' : 'drink',
+      nationality: curRecipe.strArea || '',
+      category: curRecipe.strCategory,
+      alcoholicOrNot: curRecipe.strAlcoholic || '',
+      name: curRecipe[`str${page === 'Meals' ? 'Meal' : 'Drink'}`],
+      image: curRecipe[`str${page === 'Meals' ? 'Meal' : 'Drink'}Thumb`],
+      doneDate: timeNow,
+      tags: curRecipe.strTags ? curRecipe.strTags.split(',') : [],
+    };
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const newDoneRecipes = [...doneRecipes, doneRecipe];
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+
+    history.push('/done-recipes');
+  };
+
   useEffect(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (!doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
 
     if (!inProgressRecipes) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(
         { drinks: {}, meals: {} },
       ));
+    }
+    if (!favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
 
     fetchDetails(page, id, setCurRecipe);
@@ -42,10 +91,17 @@ function RecipeInProgress(props) {
     }
   }, [curRecipe]);
 
+  const allIngredients = getIngredients();
+
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
-      <IngredientsCheck progress={ progress } setProgress={ setProgress } />
+      <IngredientsCheck
+        page={ page }
+        id={ id }
+        progress={ progress }
+        setProgress={ setProgress }
+      />
       <p data-testid="instructions">{curRecipe.strInstructions}</p>
       {
         page === 'Meals' && (
@@ -62,9 +118,9 @@ function RecipeInProgress(props) {
         <button
           className="footer"
           data-testid="finish-recipe-btn"
-          onClick={ () => {
-            history.push('done/recipes');
-          } }
+          disabled={ allIngredients.length !== progress.length
+             || progress.length === 0 }
+          onClick={ finishRecipe }
         >
           Finish Recipe
         </button>
