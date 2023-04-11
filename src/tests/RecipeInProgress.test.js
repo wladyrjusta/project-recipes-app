@@ -6,11 +6,15 @@ import fetch from '../../cypress/mocks/fetch';
 import oneMeal from '../../cypress/mocks/oneMeal';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWith';
+import oneDrink from '../../cypress/mocks/oneDrink';
 
 const mealData = oneMeal.meals[0];
 
 const initialEntries = ['/meals/52771/in-progress'];
 const mealId = '52771';
+
+const initialEntriesDrink = ['/drinks/178319/in-progress'];
+const drinkId = '178319';
 
 describe('Teste da tela de progresso', () => {
   test('Inicia recipe e verifica se foi redirecionado para tela de progresso', () => {
@@ -69,6 +73,33 @@ describe('Teste da tela de progresso', () => {
 
     expect(finishButton).toBeEnabled();
     expect(JSON.stringify(inProgressRecipes)).toEqual(inProgressRecipesLocal);
+
+    userEvent.click(finishButton);
+    expect(history.location.pathname).toEqual('/done-recipes');
+  });
+
+  test('Testa se os steps que foram clicados estao sendo armazenados, e somos redirecionados para done-recipes', async () => {
+    const { history } = renderWithRouter(
+      <App />,
+      { initialEntries: initialEntriesDrink },
+    );
+
+    let steps = [];
+
+    await waitFor(() => {
+      steps = [...Array(3).keys()].map((number) => (
+        screen.getByTestId(`${number}-ingredient-step`)));
+    }, {
+      timeout: 2000,
+    });
+
+    steps.forEach((step) => {
+      userEvent.click(step);
+    });
+
+    const finishButton = await screen.findByTestId('finish-recipe-btn');
+
+    expect(finishButton).toBeEnabled();
 
     userEvent.click(finishButton);
     expect(history.location.pathname).toEqual('/done-recipes');
