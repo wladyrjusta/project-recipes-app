@@ -12,6 +12,7 @@ function RecipeInProgress(props) {
   // const [allIngredients, setAllIngredients] = useState([]);
   const [progress, setProgress] = useState([]);
   const [ytURL, setYtURL] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe, setCurRecipe } = RecipeContext;
@@ -93,6 +94,10 @@ function RecipeInProgress(props) {
 
   const allIngredients = getIngredients();
 
+  useEffect(() => {
+    setIsDisabled((allIngredients.length !== progress.length) || progress.length === 0);
+  });
+
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
@@ -118,8 +123,7 @@ function RecipeInProgress(props) {
         <button
           className="footer"
           data-testid="finish-recipe-btn"
-          disabled={ allIngredients.length !== progress.length
-             || progress.length === 0 }
+          disabled={ isDisabled }
           onClick={ finishRecipe }
         >
           Finish Recipe

@@ -25,7 +25,6 @@ function HeaderDetails({ page, rId }) {
   };
 
   const handleFavorite = (pageStr) => {
-    console.log(pageStr);
     const type = pageStr === 'Meals' ? 'Meal' : 'Drink';
 
     const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));

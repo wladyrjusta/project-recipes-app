@@ -28,7 +28,7 @@ function RecipeDetails(props) {
   const searchInProgress = (idToSearch, setState) => {
     const searchKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const searchResult = Object.keys(searchKey[page.toLowerCase()])
-      .some((i) => i === idToSearch);
+      .some((i) => parseInt(i, 10) === parseInt(idToSearch, 10));
     setState(searchResult);
   };
 
