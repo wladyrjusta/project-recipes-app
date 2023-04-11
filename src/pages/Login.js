@@ -1,12 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ReceitasContext from '../context/ReceitasContext';
 
 function Login(props) {
-  const RContext = useContext(ReceitasContext);
-  const { teste } = RContext;
-  console.log(teste);
-
   const { history } = props;
 
   const [email, setEmail] = useState('');
