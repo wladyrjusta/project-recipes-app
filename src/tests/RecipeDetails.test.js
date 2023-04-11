@@ -120,15 +120,17 @@ describe('Testes da página RecipeDetails', () => {
     });
   });
 
-  test('Testa se o componente esta em progresso', async () => {
+  test('Testa se o componente tem o botao continue progress', () => {
     fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771');
 
-    const { history } = renderWithRouter(<App />, { initialEntries: ['/meals/52771/'] });
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ drinks: {}, meals: { 52771: ['penne rigate'] } }));
 
-    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+    renderWithRouter(<App />, { initialEntries: ['/meals/52771/'] });
 
-    userEvent.click(startRecipeBtn);
+    const continueButton = screen.getByRole('button', {
+      name: /continue recipe/i,
+    });
 
-    expect(startRecipeBtn).not.toBeInTheDocument();
+    expect(continueButton).toBeInTheDocument();
   });
 });
