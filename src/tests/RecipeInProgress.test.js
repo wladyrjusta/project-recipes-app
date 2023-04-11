@@ -73,4 +73,34 @@ describe('Teste da tela de progresso', () => {
     userEvent.click(finishButton);
     expect(history.location.pathname).toEqual('/done-recipes');
   });
+
+  test('Verifica se o botao finish recipe esta desabilitado', async () => {
+    renderWithRouter(<App />, { initialEntries });
+
+    const finishButton = screen.getByTestId('finish-recipe-btn');
+    expect(finishButton).toBeInTheDocument();
+    expect(finishButton).toBeDisabled();
+  });
+
+  test('Testa se caso o localStorage esteja vazio, seja criado um vazio', () => {
+    localStorage.clear();
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    expect(doneRecipes).toBeNull();
+    expect(inProgressRecipes).toBeNull();
+    expect(favoriteRecipes).toBeNull();
+
+    renderWithRouter(<App />, { initialEntries });
+
+    const doneRecipesRender = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressRecipesRender = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favoriteRecipesRender = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    expect(doneRecipesRender).not.toBeNull();
+    expect(inProgressRecipesRender).not.toBeNull();
+    expect(favoriteRecipesRender).not.toBeNull();
+  });
 });
