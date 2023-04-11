@@ -80,6 +80,7 @@ function IngredientsCheck(props) {
           >
             <input
               id={ `${i.strIngredient}${index}` }
+              data-testid={ `${index}-ingredient-step-btn` }
               type="checkbox"
               checked={ verifyChecked(i.strIngredient) }
               onChange={ () => manageIgredients(i.strIngredient) }
