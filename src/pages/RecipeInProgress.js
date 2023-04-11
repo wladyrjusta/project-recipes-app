@@ -96,7 +96,7 @@ function RecipeInProgress(props) {
 
   useEffect(() => {
     setIsDisabled((allIngredients.length !== progress.length) || progress.length === 0);
-  }, [allIngredients, progress]);
+  });
 
   return (
     <div>
