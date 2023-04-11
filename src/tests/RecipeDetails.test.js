@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import fetch from '../../cypress/mocks/fetch';
@@ -90,6 +90,7 @@ describe('Testes da página RecipeDetails', () => {
     const favoriteRecipesAfterUnlike = JSON.parse(localStorage.getItem('favoriteRecipes'));
     expect(favoriteRecipesAfterUnlike).toHaveLength(0);
   });
+
   test('Testa se o botão start Recipe direciona para tela de receita em progresso', async () => {
     fetch(initialURL);
 
@@ -101,5 +102,33 @@ describe('Testes da página RecipeDetails', () => {
 
     const { pathname } = history.location;
     expect(pathname).toBe('/drinks/178319/in-progress');
+  });
+
+  test('Testa se o componente iframe carrega o link do youtube', async () => {
+    fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771');
+
+    renderWithRouter(<App />, { initialEntries: ['/meals/52771/'] });
+
+    const iframeElement = screen.getByTestId('video');
+
+    expect(iframeElement).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(iframeElement).toHaveAttribute('src', 'https://www.youtube.com/embed/1IszT_guI08');
+    }, {
+      timeout: 2000,
+    });
+  });
+
+  test('Testa se o componente esta em progresso', async () => {
+    fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771');
+
+    const { history } = renderWithRouter(<App />, { initialEntries: ['/meals/52771/'] });
+
+    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+
+    userEvent.click(startRecipeBtn);
+
+    expect(startRecipeBtn).not.toBeInTheDocument();
   });
 });

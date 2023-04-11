@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReceitasContext from '../../context/ReceitasContext';
 import '../../styles/IngredientCheck.css';
@@ -67,6 +67,17 @@ function IngredientsCheck(props) {
       setProgress(newIngredients);
     }
   };
+
+  useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes[page.toLowerCase()] === undefined) {
+      inProgressRecipes[page.toLowerCase()] = {};
+    }
+    if (!Object.keys(inProgressRecipes[page.toLowerCase()]).some((i) => i === id)) {
+      inProgressRecipes[page.toLowerCase()][id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
+  });
 
   return (
     <ul>
