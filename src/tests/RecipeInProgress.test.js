@@ -1,20 +1,16 @@
 import React from 'react';
-import testLibrary, { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import fetch from '../../cypress/mocks/fetch';
-import oneMeal from '../../cypress/mocks/oneMeal';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWith';
-import oneDrink from '../../cypress/mocks/oneDrink';
-
-const mealData = oneMeal.meals[0];
 
 const initialEntries = ['/meals/52771/in-progress'];
 const mealId = '52771';
 
 const initialEntriesDrink = ['/drinks/178319/in-progress'];
-const drinkId = '178319';
+
+const finishButtonId = 'finish-recipe-btn';
 
 describe('Teste da tela de progresso', () => {
   test('Inicia recipe e verifica se foi redirecionado para tela de progresso', () => {
@@ -69,7 +65,7 @@ describe('Teste da tela de progresso', () => {
       },
     };
 
-    const finishButton = await screen.findByTestId('finish-recipe-btn');
+    const finishButton = await screen.findByTestId(finishButtonId);
 
     expect(finishButton).toBeEnabled();
     expect(JSON.stringify(inProgressRecipes)).toEqual(inProgressRecipesLocal);
@@ -108,7 +104,7 @@ describe('Teste da tela de progresso', () => {
   test('Verifica se o botao finish recipe esta desabilitado', async () => {
     renderWithRouter(<App />, { initialEntries });
 
-    const finishButton = screen.getByTestId('finish-recipe-btn');
+    const finishButton = screen.getByTestId(finishButtonId);
     expect(finishButton).toBeInTheDocument();
     expect(finishButton).toBeDisabled();
   });
