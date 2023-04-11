@@ -1,0 +1,118 @@
+/* .header-container {
+  display: flex;
+  flex-direction: column;
+} */
+
+.header-sup-container {
+  background-color: #FCDC36;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 52px;
+  justify-content: space-around;
+}
+
+.search-icon {
+  display: flex;
+}
+
+.search-icon-btn {
+  background-color: #FCDC36;
+  display: flex;
+  border: none;
+  margin-right: 10px;
+}
+
+.header-sup-container-1 {
+  color: #41197F;
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+}
+
+.header-sup-container-2 {
+  /* background-color: #F5F5F5; */
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.app-text {
+  font-weight: 900;
+}
+
+.header-inf-container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  justify-content: center;
+}
+
+.header-inf-container-1 {
+  background-color: #F5F5F5;
+  color: #41197F;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  height: 122px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header-inf-container-2 {
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  flex-wrap: wrap;
+  /* height: 88px; */
+  justify-content: center;
+}
+
+.search-bar-container {
+  background-color: #41197F;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  flex-wrap: wrap;
+  height: 120px;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.input-searchbar-header {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: solid gray 1px;
+}
+
+.checkbox-searchbar-header {
+  color: #fcdc36;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.btn-searchbar-header {
+  align-items: center;
+  background-color: #fcdc36;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  font-size: 12px;
+  height: 25px;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 208px;
+}
