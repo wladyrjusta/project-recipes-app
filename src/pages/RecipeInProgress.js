@@ -119,16 +119,13 @@ function RecipeInProgress(props) {
           />
         )
       }
-      <footer>
-        <button
-          className="footer"
-          data-testid="finish-recipe-btn"
-          disabled={ isDisabled }
-          onClick={ finishRecipe }
-        >
-          Finish Recipe
-        </button>
-      </footer>
+      <button
+        data-testid="finish-recipe-btn"
+        disabled={ isDisabled }
+        onClick={ finishRecipe }
+      >
+        Finish Recipe
+      </button>
     </div>
   );
 }
