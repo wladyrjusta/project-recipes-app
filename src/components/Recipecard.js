@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import '../styles/Recipes.css';
+
 function Recipecard(props) {
   const { index, image, name, url } = props;
   return (
     <Link
+      className="recipe-card"
       to={ url }
       data-testid={ `${index}-recipe-card` }
     >

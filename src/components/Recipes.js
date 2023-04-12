@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Recipecard from './Recipecard';
 import ReceitasContext from '../context/ReceitasContext';
 
+import '../styles/Recipes.css';
+
 function Recipes({ page }) {
   const RecipeContext = useContext(ReceitasContext);
   const { recipes } = RecipeContext;
@@ -14,7 +16,7 @@ function Recipes({ page }) {
   const idValue = page === 'Meals' ? 'idMeal' : 'idDrink';
 
   return (
-    <div>
+    <div className="recipes-main">
       {
         recipes.slice(0, maxRecipes).map((r, i) => (<Recipecard
           key={ r[keyValue] }
