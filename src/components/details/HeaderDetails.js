@@ -7,14 +7,14 @@ import blackFavorite from '../../images/blackHeartIcon.svg';
 import whiteFavorite from '../../images/whiteHeartIcon.svg';
 import '../../styles/recipeDetail.css';
 
-import allmeals from '../../styles/images/meals/all.svg';
+import allMeals from '../../styles/images/meals/all.svg';
 import beef from '../../styles/images/meals/beef.svg';
 import breakfast from '../../styles/images/meals/breakfast.svg';
 import chicken from '../../styles/images/meals/chicken.svg';
 import dessert from '../../styles/images/meals/dessert.svg';
 import goat from '../../styles/images/meals/goat.svg';
 
-import alldrinks from '../../styles/images/drinks/allDrink.svg';
+import allDrinks from '../../styles/images/drinks/allDrink.svg';
 import cocktail from '../../styles/images/drinks/cocktail.svg';
 import cocoa from '../../styles/images/drinks/cocoa.svg';
 import ordinary from '../../styles/images/drinks/otherDrink.svg';
@@ -22,13 +22,13 @@ import other from '../../styles/images/drinks/other.svg';
 import shake from '../../styles/images/drinks/shake.svg';
 
 const imgObject = {
-  allmeals,
+  allMeals,
   beef,
   breakfast,
   chicken,
   dessert,
   goat,
-  alldrinks,
+  allDrinks,
   'ordinary drink': ordinary,
   cocktail,
   shake,
@@ -97,11 +97,11 @@ function HeaderDetails({ page, rId }) {
       >
         {curRecipe[nameValue]}
       </h1>
-
-      { console.log(curRecipe) }
       <img
         src={ curRecipe
-           && imgObject[curRecipe.strCategory.toLowerCase()] }
+           && imgObject[curRecipe.strCategory
+             .toLowerCase()] ? imgObject[curRecipe.strCategory
+            .toLowerCase()] : imgObject[`all${page}`] }
         alt={ curRecipe.strCategory }
         className="header-detail-image-category"
       />
@@ -110,12 +110,12 @@ function HeaderDetails({ page, rId }) {
         className="header-detail-recipe-category"
       >
         {curRecipe.strCategory}
-        {
-          page === 'Drinks' && (
-            <span className="header-detail-alcoholic">{curRecipe.strAlcoholic}</span>
-          )
-        }
       </p>
+      {
+        page === 'Drinks' && (
+          <span className="header-detail-alcoholic">{curRecipe.strAlcoholic}</span>
+        )
+      }
       <button
         onClick={ () => handleClick(page, rId) }
         className="header-detail-btn-share"

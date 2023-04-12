@@ -5,6 +5,7 @@
 }
 
 .header-detail-recipe-img {
+  top: 0;
   position: absolute;
   height: 162px;
   width: 100%;
@@ -13,50 +14,80 @@
 
 .header-detail-title {
   position: absolute;
-  z-index: 2;
-  height: 62px;
-  width: 45%;
-  color: white;
-  /* border: solid 1px black; */
-  left: 50%;
-  top: 81px;
+width: 147px;
+height: 21px;
+left: 109.01px;
+top: 81px;
+font-family: 'Epilogue';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 20px;
+text-align: center;
+letter-spacing: 0.105em;
+text-transform: uppercase;
+color: #FFFFFF;
+z-index: 2;
 }
 
 .header-detail-alcoholic {
-  color: white;
   position: absolute;
-  z-index: 2;
-  /* border: solid 1px black; */
-  width: 110px;
+  width: 136px;
+  height: 11px;
+  left: 63px;
+  top: 45px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
   font-size: 12px;
+  line-height: 12px;
+  z-index: 2;
+  color: #FCC436;
 }
 
 .header-detail-recipe-category {
   position: absolute;
-  z-index: 1;
+  width: 136px;
+  height: 11px;
+  left: 63px;
+  top: 25px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 12px;
+  z-index: 2;
+  color: #FCC436;
 }
 
 .header-detail-image-category {
-  /* border: solid 1px black; */
   position: absolute;
+  left: 4.01%;
+  right: 89.1%;
+  top: 1.86%;
+  bottom: 96.55%;
   z-index: 2;
-  left: 10px;
 }
 
 .header-detail-btn-share {
   position: absolute;
+  left: 76.67%;
+  right: 20.77%;
+  top: 1.75%;
+  bottom: 96.5%;
   z-index: 2;
-  /* border: solid 1px black; */
   background-color: rgba(255, 255, 255, 0);
-  right: 50px;
   border: none;
 }
 
 .header-detail-btn-favorite {
-  position: absolute;
-  z-index: 2;
-  /* border: solid 1px black; */
   background-color: rgba(255, 255, 255, 0);
-  right: 10px;
   border: none;
+  height: 20.3px;
+  right: 25.77%;
+  left: 307px;
+  position: absolute;
+  top: 1.80%;
+  width: 24.89px;
+  z-index: 2;
 }
