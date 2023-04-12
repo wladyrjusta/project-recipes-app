@@ -62,7 +62,7 @@ function Header(props) {
 
           <div className="header-inf-container-2">
             {
-              (search || searchArea) && <SearchBar title={ title } />
+              (search && searchArea) && <SearchBar title={ title } />
             }
           </div>
         </div>
