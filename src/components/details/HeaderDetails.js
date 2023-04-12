@@ -5,6 +5,36 @@ import ReceitasContext from '../../context/ReceitasContext';
 import icon from '../../images/shareIcon.svg';
 import blackFavorite from '../../images/blackHeartIcon.svg';
 import whiteFavorite from '../../images/whiteHeartIcon.svg';
+import '../../styles/recipeDetail.css';
+
+import allmeals from '../../styles/images/meals/all.svg';
+import beef from '../../styles/images/meals/beef.svg';
+import breakfast from '../../styles/images/meals/breakfast.svg';
+import chicken from '../../styles/images/meals/chicken.svg';
+import dessert from '../../styles/images/meals/dessert.svg';
+import goat from '../../styles/images/meals/goat.svg';
+
+import alldrinks from '../../styles/images/drinks/allDrink.svg';
+import cocktail from '../../styles/images/drinks/cocktail.svg';
+import cocoa from '../../styles/images/drinks/cocoa.svg';
+import ordinary from '../../styles/images/drinks/otherDrink.svg';
+import other from '../../styles/images/drinks/other.svg';
+import shake from '../../styles/images/drinks/shake.svg';
+
+const imgObject = {
+  allmeals,
+  beef,
+  breakfast,
+  chicken,
+  dessert,
+  goat,
+  alldrinks,
+  'ordinary drink': ordinary,
+  cocktail,
+  shake,
+  'other / unknown': other,
+  cocoa,
+};
 
 function HeaderDetails({ page, rId }) {
   const RecipeContext = useContext(ReceitasContext);
@@ -53,24 +83,42 @@ function HeaderDetails({ page, rId }) {
   }, []);
 
   return (
-    <div>
+    <div className="header-detail-container">
       <img
         src={ curRecipe[imgValue] }
         alt={ curRecipe[nameValue] }
         width="200px"
         data-testid="recipe-photo"
+        className="header-detail-recipe-img"
       />
-      <h1 data-testid="recipe-title">{curRecipe[nameValue]}</h1>
-      <h2 data-testid="recipe-category">
+      <h1
+        data-testid="recipe-title"
+        className="header-detail-title"
+      >
+        {curRecipe[nameValue]}
+      </h1>
+
+      { console.log(curRecipe) }
+      <img
+        src={ curRecipe
+           && imgObject[curRecipe.strCategory.toLowerCase()] }
+        alt={ curRecipe.strCategory }
+        className="header-detail-image-category"
+      />
+      <p
+        data-testid="recipe-category"
+        className="header-detail-recipe-category"
+      >
         {curRecipe.strCategory}
         {
           page === 'Drinks' && (
-            <span>{curRecipe.strAlcoholic}</span>
+            <span className="header-detail-alcoholic">{curRecipe.strAlcoholic}</span>
           )
         }
-      </h2>
+      </p>
       <button
         onClick={ () => handleClick(page, rId) }
+        className="header-detail-btn-share"
       >
         <img
           data-testid="share-btn"
@@ -80,6 +128,7 @@ function HeaderDetails({ page, rId }) {
       </button>
       <button
         onClick={ () => handleFavorite(page) }
+        className="header-detail-btn-favorite"
       >
         <img
           data-testid="favorite-btn"
