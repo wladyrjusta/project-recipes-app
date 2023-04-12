@@ -8,14 +8,33 @@ import '../styles/Header.css';
 import iconHeader from '../styles/images/iconHeader.svg';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
+import doneRecipeIcon from '../images/doneRecipeIcon.svg';
+import favoritesIcon from '../images/favoritesIcon.svg';
+import profileTitleIcon from '../images/profileTitleIcon.svg';
 
 function Header(props) {
   const { title, search } = props;
 
   const [searchArea, setSearchArea] = useState(false);
 
+  const handleTitleIcon = () => {
+    switch (title) {
+    case 'Meals':
+      return mealIcon;
+    case 'Drinks':
+      return drinkIcon;
+    case 'Done Recipes':
+      return doneRecipeIcon;
+    case 'Favorite Recipes':
+      return favoritesIcon;
+    case 'Profile':
+      return profileTitleIcon;
+    default: return 'Meals';
+    }
+  };
+
   return (
-    <div>
+    <div className="header-container">
       <div className="header-sup-container">
         <div className="header-sup-container-1">
           <img src={ iconHeader } alt="Sino" />
@@ -50,23 +69,22 @@ function Header(props) {
           </Link>
 
         </div>
+      </div>
 
-        <div className="header-inf-container">
-          <div className="header-inf-container-1">
-            <img
-              src={ title === 'Meals' ? mealIcon : drinkIcon }
-              alt={ `${title} Icon` }
-            />
-            <h1 data-testid="page-title">{ title }</h1>
-          </div>
-
-          <div className="header-inf-container-2">
-            {
-              (search && searchArea) && <SearchBar title={ title } />
-            }
-          </div>
+      <div className="header-inf-container">
+        <div className="header-inf-container-1">
+          <img
+            src={ handleTitleIcon() }
+            alt={ `${title} Icon` }
+          />
+          <h1 data-testid="page-title">{ title }</h1>
         </div>
 
+        <div className="header-inf-container-2">
+          {
+            (search && searchArea) && <SearchBar title={ title } />
+          }
+        </div>
       </div>
 
     </div>

@@ -1,7 +1,7 @@
-/* .header-container {
+.header-container {
   display: flex;
   flex-direction: column;
-} */
+}
 
 .header-sup-container {
   background-color: #FCDC36;
@@ -18,12 +18,13 @@
 
 .search-icon-btn {
   background-color: #FCDC36;
-  display: flex;
   border: none;
+  display: flex;
   margin-right: 10px;
 }
 
 .header-sup-container-1 {
+  align-items: center;
   color: #41197F;
   display: flex;
   justify-content: space-between;
@@ -31,7 +32,7 @@
 }
 
 .header-sup-container-2 {
-  /* background-color: #F5F5F5; */
+  align-items: center;
   display: flex;
   justify-content: space-between;
   width: 20%;
@@ -58,6 +59,7 @@
   height: 122px;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .header-inf-container-2 {
