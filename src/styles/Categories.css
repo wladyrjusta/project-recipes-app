@@ -1,0 +1,16 @@
+.category-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.category-btn-hidden {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.category-btn-img {
+  height: 60px;
+}

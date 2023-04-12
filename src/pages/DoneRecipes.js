@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import DoneRecipeCard from '../components/DoneRecipesCard';
+import Footer from '../components/Footer';
 
 function DoneRecipes() {
   const arrayDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -52,6 +53,7 @@ function DoneRecipes() {
             id={ recipe.id }
           />
         ))}
+      <Footer />
     </div>
   );
 }
