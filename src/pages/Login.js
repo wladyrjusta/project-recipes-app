@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/Login.css';
+import tomateImg from '../styles/images/tomatetomate.svg';
+import recipesImg from '../styles/images/recipes.svg';
+import backgroundRecipes from '../styles/images/Backgroundrecipes.svg';
+
 function Login(props) {
   const { history } = props;
 
@@ -17,26 +22,31 @@ function Login(props) {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-main">
+      <div className="login-header">
+        <img src={ recipesImg } alt="background" className="login-logo" />
+        <img src={ backgroundRecipes } alt="background" className="login-background" />
+      </div>
+      <img src={ tomateImg } alt="tomate" className="login-tomate" />
+      <h1>LOGIN</h1>
       <label htmlFor="emailInput">
-        Email
         <input
           id="emailInput"
           type="email"
           value={ email }
           onChange={ (e) => setEmail(e.target.value) }
           data-testid="email-input"
+          placeholder="Email"
         />
       </label>
       <label htmlFor="passwordInput">
-        Senha
         <input
           id="passwordInput"
           type="password"
           value={ password }
           onChange={ (e) => setPassord(e.target.value) }
           data-testid="password-input"
+          placeholder="Senha"
         />
       </label>
       <button
@@ -45,8 +55,7 @@ function Login(props) {
         onClick={ onClickHander }
         disabled={ !btnDisabled }
       >
-        Login
-
+        ENTER
       </button>
     </div>
   );

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;500&display=swap');
+
+.login-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  position: fixed;
+  bottom: 13%;
+}
+
+.login-header {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.login-background {
+  width: 100%;
+}
+
+.login-logo {
+  position: fixed;
+  top: 10%;
+}
+
+.login-tomate {
+  position: fixed;
+  z-index: 99;
+  top: 30%;
+}
+
+.login-main h1 {
+  color: #41197F;
+  font-family: 'Epilogue', sans-serif;
+  font-size: 20px;
+  line-height: 20.5px;
+  letter-spacing: 5px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.login-main input {
+  color: #41197F;
+  border-color: #41197F;
+  border: 1px solid #41197F;
+  border-radius: 5px;
+  height: 40px;
+  width: 275px;
+  padding-left: 25px;
+  padding-bottom: 5px;
+}
+
+.login-main input::placeholder {
+  color: #41197F;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.login-main button {
+  width: 275px;
+  height: 40px;
+  background: #FCC436;
+  border: none;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}

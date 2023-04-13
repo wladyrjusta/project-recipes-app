@@ -41,11 +41,9 @@ function Meals(props) {
     <div>
       <Header title="Meals" search />
       <Categories />
-      <div>
-        {
-          isNull && <Recipes page="Meals" />
-        }
-      </div>
+      {
+        isNull && <Recipes page="Meals" />
+      }
       <Footer />
     </div>
   );

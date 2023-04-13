@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding-bottom: 60px;
 }
 
 .recipe-card {
@@ -17,6 +18,7 @@
   color: #1A1B1C;
   column-gap: 10px;
   border-radius: 10px;
+  max-height: 180px;
 }
 
 .recipe-card img {
@@ -28,4 +30,5 @@
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 10px;
+  overflow-x: scroll;
 }
