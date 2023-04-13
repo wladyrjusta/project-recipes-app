@@ -41,11 +41,9 @@ function Drinks(props) {
     <div>
       <Header title="Drinks" search />
       <Categories />
-      <div>
-        {
-          isNull && <Recipes page="Drinks" />
-        }
-      </div>
+      {
+        isNull && <Recipes page="Drinks" />
+      }
       <Footer />
     </div>
   );
