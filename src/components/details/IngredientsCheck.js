@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReceitasContext from '../../context/ReceitasContext';
 import '../../styles/IngredientCheck.css';
 
+import '../../styles/RecipeInProgress.css';
+
 function IngredientsCheck(props) {
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe } = RecipeContext;
@@ -69,7 +71,9 @@ function IngredientsCheck(props) {
   };
 
   return (
-    <ul>
+    <ul
+      className="recipe-in-progress-container-ingredients"
+    >
       {
         ingredients.map((i, index) => (
           <label
@@ -84,8 +88,9 @@ function IngredientsCheck(props) {
               type="checkbox"
               checked={ verifyChecked(i.strIngredient) }
               onChange={ () => manageIgredients(i.strIngredient) }
+              className="recipe-in-progress-checkbox-ingredients"
             />
-            {i.strIngredient}
+            { i.strIngredient }
             {' '}
             {measures[index].strMeasure ? `- ${measures[index].strMeasure}` : ''}
           </label>

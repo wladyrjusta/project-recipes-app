@@ -90,7 +90,7 @@
   z-index: 2;
 }
 
-.header-details-ingredients-title {
+.recipe-in-progress-ingredients-title {
   margin-left: 15px;
   width: 142.8px;
   font-style: normal;
@@ -100,17 +100,46 @@
   color: #1A1B1C;
 }
 
-.header-details-ingredients {
-  margin-left: 10px;
-  width: 300px;
-  left: 5px;
-  margin-bottom: 10px;
+.recipe-in-progress-container-ingredients {
   background: #FFFFFF;
-  border: 0.554px solid #b1b1b1;
+  border: 0.554397px solid #B1B1B1;
   border-radius: 5.35144px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 325px;
 }
 
-.header-details-instructions-title {
+.recipe-in-progress-checkbox-ingredients {
+  margin: 10px;
+  all: unset;
+  display: inline-block;
+  border: dashed 1px #CCC;
+  width: 20px;
+  height: 20px;
+  background: #EEE;
+  cursor: pointer;
+}
+
+.recipe-in-progress-checkbox-ingredients:checked {
+  background: #FCC436;
+}
+
+.recipe-in-progress-checkbox-ingredients:checked::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: calc(50% - 6px);
+  top: calc(50% - 6px);
+  border-radius: 50%;
+}
+
+.recipe-in-progress-instructions-title {
   width: 142.8px;
   margin-left: 15px;
   font-style: normal;
@@ -122,10 +151,11 @@
   margin-top: 10px;
 }
 
-.header-details-instructions {
-  width: 301px;
-  margin-left: 15px;
+.recipe-in-progres-instructions {
+  width: 320px;
+  margin-left: 5px;
   margin-top: 10px;
+  margin-right: 10px;
   margin-bottom: 10px;
   font-style: normal;
   font-weight: 400;
@@ -135,14 +165,17 @@
   background: #FFFFFF;
   border: 0.554397px solid #B1B1B1;
   border-radius: 5.35144px;
-  padding: 8px;
+  padding: 10px;
+  Weight: 400;
+  Size: 14px;
+  line-height: 15.82px;
 }
 
-.header-details-instructions-video-title {
+.recipe-in-progress-instructions-video-title {
   width: 142.8px;
   height: 21px;
   margin-top: 10px;
-  margin-left: 23.01px;
+  margin-left: 15px;
   top: 882px;
   font-style: normal;
   font-weight: 700;
@@ -151,8 +184,8 @@
   color: #1A1B1C;
 }
 
-.header-details-instructions-video {
-  width: 336px;
+.recipe-in-progress-instructions-video {
+  width: 326px;
   height: 205.09px;
   margin-left: 12px;
   margin-top: 10px;
@@ -161,53 +194,28 @@
   border-radius: 0;
 }
 
-.header-details-instructions-recomended-title {
-  width: 205px;
-  height: 21px;
-  margin-left: 23px;
-  margin-bottom: 10px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 20px;
-  color: #1A1B1C;
-}
-
-.rcomendation-carousel-container {
-  display: flex;
-  flex-flow: row wrap;
-  height: 170px;
-  width: 360px;
-}
-
-.header-details-instructions-recomended-image {
-  width: 163px;
-  height: 135px;
-  margin-left: 15px;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.header-details-instructions-recomended-name {
-  box-sizing: border-box;
-  width: 163.2px;
-  margin-top: 0;
-  margin-left: 15px;
-  background: #FFFFFF;
-  border: 0.517989px solid #B1B1B1;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 18px;
-  color: #1A1B1C;
-}
-
-.header-details-btn {
+.recipe-in-progress-btn {
   margin-left: 15px;
   width: 336px;
   height: 40px;
   background: #FCC436;
+  border: none;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.recipe-in-progress-btn:disabled {
+  margin-left: 15px;
+  width: 336px;
+  height: 40px;
+  background: #e9c057d4;
   border: none;
   border-radius: 5px;
   font-style: normal;
