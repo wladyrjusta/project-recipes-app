@@ -5,6 +5,8 @@ import HeaderDetails from '../components/details/HeaderDetails';
 import IngredientsCheck from '../components/details/IngredientsCheck';
 import { fetchDetails } from '../helpers/fetchRecipe';
 
+import '../styles/RecipeInProgress.css';
+
 function RecipeInProgress(props) {
   const { page, history } = props;
   const { match: { params: { id } } } = props;
@@ -101,16 +103,25 @@ function RecipeInProgress(props) {
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
+      <h1 className="recipe-in-progress-ingredients-title">Ingredients</h1>
       <IngredientsCheck
         page={ page }
         id={ id }
         progress={ progress }
         setProgress={ setProgress }
       />
-      <p data-testid="instructions">{curRecipe.strInstructions}</p>
+      <h1 className="recipe-in-progress-instructions-title">Intructions</h1>
+      <p
+        data-testid="instructions"
+        className="recipe-in-progres-instructions"
+      >
+        {curRecipe.strInstructions}
+      </p>
+      <h1 className="recipe-in-progress-instructions-video-title">Video</h1>
       {
         page === 'Meals' && (
           <iframe
+            className="recipe-in-progress-instructions-video"
             title={ curRecipe.idMeal }
             width="420"
             height="315"
@@ -120,6 +131,7 @@ function RecipeInProgress(props) {
         )
       }
       <button
+        className="recipe-in-progress-btn"
         data-testid="finish-recipe-btn"
         disabled={ isDisabled }
         onClick={ finishRecipe }
