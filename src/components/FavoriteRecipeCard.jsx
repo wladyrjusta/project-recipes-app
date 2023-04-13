@@ -3,6 +3,7 @@ import PropTypes, { string } from 'prop-types';
 import clipboardCopy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 
+import '../styles/FavoritesRecipes.css';
 import icon from '../images/shareIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 
@@ -14,60 +15,68 @@ function FavoriteRecipeCard(props) {
     setLinkCopied('Link copied!');
   };
 
-  const { index, image, name, categoria, date, tags, type, id, handleFavorite } = props;
+  const { index, image, name, categoria, date, type, id, handleFavorite } = props;
 
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-      <Link
-        to={ `/${type}s/${id}` }
-      >
-        <h1 data-testid={ `${index}-horizontal-name` }>{ name }</h1>
-      </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>{ categoria }</p>
+    <div
+      data-testid={ `${index}-recipe-card` }
+      className="favorites-recipes-card-container"
+    >
       <Link
         to={ `/${type}s/${id}` }
       >
         <img
+          className="favorites-recipes-img-container"
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
           width="300px"
         />
       </Link>
-      <p data-testid={ `${index}-horizontal-done-date` }>{ date }</p>
-      <p
-        data-testid="link-copied"
-      >
-        { linkCopied }
-      </p>
-      <button
-        onClick={ () => handleClick(type, id) }
-      >
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          alt="share button"
-          src={ icon }
-        />
-      </button>
-      <button
-        onClick={ () => handleFavorite(id) }
-      >
-        <img
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          alt="share button"
-          src={ favorite }
-        />
-      </button>
-      {
-        tags && tags.map((tag, i) => (
+      <div className="favorites-recipes-infos-container">
+        <Link
+          to={ `/${type}s/${id}` }
+        >
           <p
-            key={ `${tag}-${i}` }
-            data-testid={ `${index}-${tag}-horizontal-tag` }
+            data-testid={ `${index}-horizontal-name` }
+            className="favorites-recipe-name"
           >
-            {tag}
+            { name }
           </p>
-        ))
-      }
+        </Link>
+        <p
+          data-testid={ `${index}-horizontal-top-text` }
+          className="favorites-recipe-category"
+        >
+          { categoria }
+        </p>
+        <p data-testid={ `${index}-horizontal-done-date` }>{ date }</p>
+        <p
+          data-testid="link-copied"
+        >
+          { linkCopied }
+        </p>
+        <button
+          className="favorites-recipe-btn"
+          onClick={ () => handleClick(type, id) }
+        >
+          <img
+            data-testid={ `${index}-horizontal-share-btn` }
+            alt="share button"
+            src={ icon }
+          />
+        </button>
+        <button
+          className="favorites-recipe-btn"
+          onClick={ () => handleFavorite(id) }
+        >
+          <img
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            alt="share button"
+            src={ favorite }
+          />
+        </button>
+      </div>
     </div>
   );
 }
