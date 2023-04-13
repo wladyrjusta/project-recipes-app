@@ -79,7 +79,8 @@ function RecipeDetails(props) {
       >
         {curRecipe.strInstructions}
       </p>
-      <h1 className="header-details-instructions-video-title">Video</h1>
+      { curRecipe.idMeal
+        && <h1 className="header-details-instructions-video-title">Video</h1> }
       {
         page === 'Meals' && (
           <iframe
@@ -92,7 +93,8 @@ function RecipeDetails(props) {
           />
         )
       }
-      <h1 className="header-details-instructions-recomended-title">Recomended</h1>
+      { recomendation.length > 0
+       && <h1 className="header-details-instructions-recomended-title">Recomended</h1> }
       {
         recomendation.length > 0 && <Recomended
           page={ page }

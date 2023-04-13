@@ -3,6 +3,11 @@ import Header from '../components/Header';
 import DoneRecipeCard from '../components/DoneRecipesCard';
 import Footer from '../components/Footer';
 
+import '../styles/DoneRecipes.css';
+import allRecipes from '../images/allRecipes.svg';
+import allFood from '../images/allFood.png';
+import allDrinks from '../images/allDrinks.png';
+
 function DoneRecipes() {
   const arrayDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const [filteredRecipes, setFilteredRecipes] = useState(arrayDoneRecipes
@@ -17,27 +22,49 @@ function DoneRecipes() {
     }
   };
 
+  const numer = 10;
+
   return (
     <div>
       <Header title="Done Recipes" search={ false } />
-      <button
-        onClick={ () => handleFilterClic() }
-        data-testid="filter-by-all-btn"
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-meal-btn"
-        onClick={ () => handleFilterClic('meal') }
-      >
-        Meals
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleFilterClic('drink') }
-      >
-        Drinks
-      </button>
+      <div className="done-recipes-btn-category-container">
+        <button
+          className="done-recipes-btn-category"
+          onClick={ () => handleFilterClic() }
+          data-testid="filter-by-all-btn"
+        >
+          <img
+            className="done-recipes-image-category"
+            src={ allRecipes }
+            alt="icone de bebida"
+            data-testid="drinks-bottom-btn"
+          />
+        </button>
+        <button
+          className="done-recipes-btn-category"
+          data-testid="filter-by-meal-btn"
+          onClick={ () => handleFilterClic('meal') }
+        >
+          <img
+            className="done-recipes-image-category"
+            src={ allFood }
+            alt="icone de bebida"
+            data-testid="drinks-bottom-btn"
+          />
+        </button>
+        <button
+          className="done-recipes-btn-category"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleFilterClic('drink') }
+        >
+          <img
+            className="done-recipes-image-category"
+            src={ allDrinks }
+            alt="icone de bebida"
+            data-testid="drinks-bottom-btn"
+          />
+        </button>
+      </div>
       { (filteredRecipes && filteredRecipes.length > 0)
         && filteredRecipes.map((recipe, index) => (
           <DoneRecipeCard
@@ -47,7 +74,7 @@ function DoneRecipes() {
             name={ recipe.name }
             categoria={ `${recipe.nationality} - ${recipe.category} -
             ${recipe.alcoholicOrNot}` }
-            date={ recipe.doneDate }
+            date={ `Done in: ${recipe.doneDate.slice(0, numer)}` }
             tags={ recipe.tags }
             type={ recipe.type }
             id={ recipe.id }
