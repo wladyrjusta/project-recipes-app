@@ -117,7 +117,10 @@ function RecipeInProgress(props) {
       >
         {curRecipe.strInstructions}
       </p>
-      <h1 className="recipe-in-progress-instructions-video-title">Video</h1>
+      {
+        curRecipe.idMeal
+        && <h1 className="recipe-in-progress-instructions-video-title">Video</h1>
+      }
       {
         page === 'Meals' && (
           <iframe

@@ -90,7 +90,7 @@ function IngredientsCheck(props) {
               onChange={ () => manageIgredients(i.strIngredient) }
               className="recipe-in-progress-checkbox-ingredients"
             />
-            { i.strIngredient }
+            {i.strIngredient}
             {' '}
             {measures[index].strMeasure ? `- ${measures[index].strMeasure}` : ''}
           </label>
