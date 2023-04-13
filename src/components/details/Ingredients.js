@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import ReceitasContext from '../../context/ReceitasContext';
 
+import '../../styles/recipeDetail.css';
+
 function Ingredients() {
   const RecipeContext = useContext(ReceitasContext);
   const { curRecipe } = RecipeContext;
@@ -41,7 +43,7 @@ function Ingredients() {
   const measures = getMeasure();
 
   return (
-    <ul>
+    <ul className="header-details-ingredients">
       {
         ingredients.map((i, index) => (
           <li

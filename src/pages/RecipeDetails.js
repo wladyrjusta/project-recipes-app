@@ -7,6 +7,8 @@ import Ingredients from '../components/details/Ingredients';
 import Recomended from '../components/details/Recomended';
 import RecipeButton from '../components/details/RecipeButton';
 
+import '../styles/recipeDetail.css';
+
 function RecipeDetails(props) {
   const { page, history } = props;
   const { match: { params: { id } } } = props;
@@ -68,11 +70,20 @@ function RecipeDetails(props) {
   return (
     <div>
       <HeaderDetails page={ page } rId={ id } />
+      <h1 className="header-details-ingredients-title">Ingredients</h1>
       <Ingredients />
-      <p data-testid="instructions">{curRecipe.strInstructions}</p>
+      <h1 className="header-details-instructions-title">Intructions</h1>
+      <p
+        data-testid="instructions"
+        className="header-details-instructions"
+      >
+        {curRecipe.strInstructions}
+      </p>
+      <h1 className="header-details-instructions-video-title">Video</h1>
       {
         page === 'Meals' && (
           <iframe
+            className="header-details-instructions-video"
             title={ curRecipe.idMeal }
             width="420"
             height="315"
@@ -81,6 +92,7 @@ function RecipeDetails(props) {
           />
         )
       }
+      <h1 className="header-details-instructions-recomended-title">Recomended</h1>
       {
         recomendation.length > 0 && <Recomended
           page={ page }
