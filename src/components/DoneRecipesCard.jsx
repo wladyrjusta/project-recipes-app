@@ -3,6 +3,7 @@ import PropTypes, { string } from 'prop-types';
 import clipboardCopy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 
+import '../styles/DoneRecipes.css';
 import icon from '../images/shareIcon.svg';
 
 function DoneRecipeCard(props) {
