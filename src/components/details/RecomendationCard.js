@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import '../../styles/recipeDetail.css';
+
 function RecomendationCard(props) {
   const { index, image, name, url } = props;
 
@@ -10,8 +12,17 @@ function RecomendationCard(props) {
       to={ url }
       data-testid={ `${index}-recommendation-card` }
     >
-      <img src={ image } alt={ name } width="200px" />
-      <p data-testid={ `${index}-recommendation-title` }>{name}</p>
+      <img
+        className="header-details-instructions-recomended-image"
+        src={ image }
+        alt={ name }
+      />
+      <p
+        className="header-details-instructions-recomended-name"
+        data-testid={ `${index}-recommendation-title` }
+      >
+        {name}
+      </p>
     </Link>
   );
 }

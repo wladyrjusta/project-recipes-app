@@ -2,6 +2,8 @@ import React from 'react';
 import '../../App.css';
 import PropTypes from 'prop-types';
 
+import '../../styles/recipeDetail.css';
+
 function RecipeButton(props) {
   const { inProgress, history, id, page } = props;
 
@@ -10,7 +12,7 @@ function RecipeButton(props) {
   return (
     <footer>
       <button
-        className="footer"
+        className="header-details-btn"
         data-testid="start-recipe-btn"
         onClick={ () => {
           history.push(`/${page.toLowerCase()}/${id}/in-progress`);
